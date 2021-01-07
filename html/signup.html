@@ -63,20 +63,20 @@
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                <li class="nav-item active">
-                    <a class="nav-link" href="/index.html">Home</a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/login.html">Login</a>
+                    <a class="nav-link" href="/account/signin/">Login<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/play.html">Play</a>
+                    <a class="nav-link" href="/play/">Play</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/leaderboard.html">Leaderboard<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contactus.html">Contact us</a>
+                    <a class="nav-link" href="/contactus/">Contact us</a>
                 </li>
             </ul>
         </div>
@@ -85,55 +85,38 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 content">
+                <h1>Sign Up</h1>
 
-
-                <h1>Leaderboard</h1>
-
-                <p>Below you can find the best scores achieved by all the players. Join them and fight your way to the
-                    top!</p>
-
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">#</th>
-                            <th scope="col">Nickname</th>
-                            <th scope="col">Best score</th>
-
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="table-warning">
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>3000</td>
-                        </tr>
-                        <tr class="table-secondary">
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>2000</td>
-                        </tr>
-                        <tr class="table-third">
-                            <th scope="row">3</th>
-                            <td>Thornton</td>
-                            <td>1000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">4</th>
-                            <td>Daniel</td>
-                            <td>500</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">5</th>
-                            <td>Radek</td>
-                            <td>0</td>
-                        </tr>
-                    </tbody>
-                </table>
-
-
+                <form class="login" method="POST" action="/accounts/signin/">
+                    <div class="form-group">
+                        <label for="inputEmail">Email address</label>
+                        <input type="email" class="form-control" id="inputEmail" aria-describedby="emailHelp"
+                            placeholder="user@example.com">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <label for="inputUsername">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="inputUsername" placeholder="Enter username" required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                          Your nickname is required.
+                        </div>
+                    </div>
+                    <small id="emailHelp" class="form-text text-muted" style="margin-bottom: 1rem;">This is how other players will see you.</small>
+                    <div class="form-group">
+                        <label for="inputPassword">Password</label>
+                        <input type="password" class="form-control" id="inputPassword" placeholder="Enter password">
+                        <small id="passwordHelp" class="form-text text-muted">The longer, the better.</small>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
     </div>
 </body>
 
 </html>
+

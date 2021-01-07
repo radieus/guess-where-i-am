@@ -64,19 +64,19 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/index.html">Home</a>
+                    <a class="nav-link" href="/">Home</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/login.html">Login<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/account/signin/">Login<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/play.html">Play</a>
+                    <a class="nav-link" href="/play/">Play</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/leaderboard.html">Leaderboard</a>
+                    <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contactus.html">Contact us</a><span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/contactus/">Contact us</a>
                 </li>
             </ul>
         </div>
@@ -87,9 +87,9 @@
             <div class="col-lg-10 offset-lg-1 content">
                 <h1>Sign In</h1>
 
-                <p>If you have not created an account yet, please <a href="/signup.html">sign up</a> first.</p>
+                <p>If you have not created an account yet, please <a href="/account/signup/">sign up</a> first.</p>
 
-                <form class="login" method="POST" action="/accounts/login/">
+                <form class="login" method="POST" action="/accounts/signin/">
                     <div class="form-group">
                         <label for="inputEmail1">Email address</label>
                         <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp"
@@ -103,7 +103,7 @@
                         <small id="passwordHelp" class="form-text text-muted">The longer, the better.</small>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/reset.html'">Forgot password?</button>
+                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/account/reset/'">Forgot password?</button>
                 </form>
             </div>
         </div>

@@ -11,7 +11,7 @@ function initialize() {
             addressControl: false,
             showRoadLabels: false,
             pov: { heading: 165, pitch: 0 },
-            zoom: 1,
+            zoom: 0,
         },
         
     );
