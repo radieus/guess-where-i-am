@@ -18,6 +18,29 @@ img {
     width: auto\9; /* ie8 */
 }
 
+
+
+.btn.btn-info.playbuttons {
+    top: 45vh;
+    right: 1vh;
+    z-index: 1001;
+    position: absolute;
+}
+
+.btn.btn-warning.playbuttons {
+    top: 45vh;
+    right: 14vh;
+    z-index: 1001;
+    position: absolute;
+}
+
+.btn.btn-primary.playbuttons {
+    top: 45vh;
+    right: 24vh;
+    z-index: 1001;
+    position: absolute;
+}
+
 p.title {
     font-family: 'Oleo Script', cursive;
     color: black;
@@ -35,15 +58,6 @@ p.title {
     background-color: lightslategrey;
 }
 
-#mapid{
-    position: absolute;
-    width: 35%;
-    height: 100px;
-    bottom: 0;
-    left: 0;
-}
-
-
 .navbar-custom {
     color: white;
     background-color: white;
@@ -59,14 +73,24 @@ p.title {
     padding: 20px;
 }
 
-.panoramaMap {
-    min-height: 53vh;
-}
-  
-.guessMap {
-    min-height: 40vh;
-}
-
 .table-third, .table-third>td, .table-third>th {
     background-color: #bf9b77;
+    
+}
+
+.table-third:hover, .table-third:hover>td, .table-third:hover>th{
+    background-color: #b88b5f;
+}
+
+#street-view {
+    height: 100vh;
+}
+
+#guess-map{
+    z-index: 1000;
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    min-height: 43vh;
+    min-width: 43vh;
 }
