@@ -28,5 +28,41 @@ function onMapClick(result) {
 
 }
 
+function makeGuess(){
+    //This function will do the following steps:
+    //Check if the marker which reflects the user's choice exists
+    if(!guessMarker){
+        alert("You didn't enter a guess!");
+        return;
+    }
+    //We will extract the latitude and longitude of the marker
+    var guessLatLng = guessMarker.getLatLng();
+    var lat = guessLatLng.lat;
+    var lng = guessLatLng.lng;
+    //Now this will be sent to the server via a POST request
+     //Now that we have the 3 words we have to do another request to /slotmachine/saveresult to try to save this result and check its validity
+     data = {
+        lat: lat,
+        lng: lng,
+        latGoal: 52.22992817667709, 
+        lngGoal: 21.00809365510941 
+    };
+    options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }
 
+    //Now let's do the fetch request 
+    fetch('/guess', options)
+        .then((response)=>{
+            console.log(response.text());
+        }).catch((err)=> console.log(err));
+
+}
 map.on('click', onMapClick);
+
+
