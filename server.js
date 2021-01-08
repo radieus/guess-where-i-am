@@ -12,30 +12,30 @@ app.use(express.json());
 var options = { 'root' : '/Users/radieus/Desktop/guess-where-i-am/html/' };
 
 app.get('/', function(request, response){
-    response.sendFile('index.html', options);
+    response.sendFile(__dirname + '/html/index.html');
 });
 
 app.get('/leaderboard/', function(request, response){
-    response.sendFile('leaderboard.html', options);
+    response.sendFile(__dirname + '/html/leaderboard.html');
 });
 
 app.get('/contactus/', function(request, response){
-    response.sendFile('contactus.html', options);
+    response.sendFile(__dirname + '/html/contactus.html');
 });
 
 app.get('/play/', function(request, response){
-    response.sendFile('play.html', options);
+    response.sendFile(__dirname + '/html/play.html');
 });
 
 app.get('/account/signup/', function(request, response){
-    response.sendFile('signup.html', options);
+    response.sendFile(__dirname + '/html/signup.html');
 });
 
 app.get('/account/signin/', function(request, response){
-    response.sendFile('signin.html', options);
+    response.sendFile(__dirname + '/html/signin.html');
 });
 
 app.get('/account/reset/', function(request, response){
-    response.sendFile('reset.html', options);
+    response.sendFile(__dirname + '/html/reset.html');
 });
 
