@@ -14,19 +14,19 @@
     <link rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css">
     <!--Icons-->
-    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="ico/apple-touch-icon-57x57.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="ico/apple-touch-icon-114x114.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="ico/apple-touch-icon-72x72.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="ico/apple-touch-icon-144x144.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="ico/apple-touch-icon-60x60.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="ico/apple-touch-icon-120x120.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="ico/apple-touch-icon-76x76.png" />
-    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="ico/apple-touch-icon-152x152.png" />
-    <link rel="icon" type="image/png" href="ico/favicon-196x196.png" sizes="196x196" />
-    <link rel="icon" type="image/png" href="ico/favicon-96x96.png" sizes="96x96" />
-    <link rel="icon" type="image/png" href="ico/favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="ico/favicon-16x16.png" sizes="16x16" />
-    <link rel="icon" type="image/png" href="ico/favicon-128.png" sizes="128x128" />
+    <link rel="apple-touch-icon-precomposed" sizes="57x57" href="/ico/apple-touch-icon-57x57.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/ico/apple-touch-icon-114x114.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/ico/apple-touch-icon-72x72.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/ico/apple-touch-icon-144x144.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="60x60" href="/ico/apple-touch-icon-60x60.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="120x120" href="/ico/apple-touch-icon-120x120.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="76x76" href="/ico/apple-touch-icon-76x76.png" />
+    <link rel="apple-touch-icon-precomposed" sizes="152x152" href="/ico/apple-touch-icon-152x152.png" />
+    <link rel="icon" type="image/png" href="/ico/favicon-196x196.png" sizes="196x196" />
+    <link rel="icon" type="image/png" href="/ico/favicon-96x96.png" sizes="96x96" />
+    <link rel="icon" type="image/png" href="/ico/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/ico/favicon-16x16.png" sizes="16x16" />
+    <link rel="icon" type="image/png" href="/ico/favicon-128.png" sizes="128x128" />
     <meta name="application-name" content="&nbsp;" />
     <meta name="msapplication-TileColor" content="#FFFFFF" />
     <meta name="msapplication-TileImage" content="mstile-144x144.png" />
@@ -59,15 +59,15 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
         <a class="navbar-brand">
-            <img src="ico/favicon-196x196.png" width="30" height="30" class="d-inline-block align-top" alt="">
+            <img src="/ico/favicon-196x196.png" width="30" height="30" class="d-inline-block align-top" alt="">
         </a>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
                     <a class="nav-link" href="/">Home</a>
                 </li>
-                <li class="nav-item active">
-                    <a class="nav-link" href="/account/signin/">Login<span class="sr-only">(current)</span></a>
+                <li class="nav-item">
+                    <a class="nav-link" href="/login/">Login</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/play/">Play</a>
@@ -75,8 +75,8 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/leaderboard/">Leaderboard</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/contactus/">Contact us</a>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/contactus/">Contact us</a><span class="sr-only">(current)</span></a>
                 </li>
             </ul>
         </div>
@@ -85,26 +85,46 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 content">
-                <h1>Sign In</h1>
 
-                <p>If you have not created an account yet, please <a href="/account/signup/">sign up</a> first.</p>
 
-                <form class="login" method="POST" action="/accounts/signin/">
+                <h1>Contact us</h1>
+
+                <p>Please select the issue from the dropdown below in order to contact us. You can also attach a screenshot showing whatever you want to show. We will try to respond as quickly as possible.</p>
+
+                <form>
                     <div class="form-group">
-                        <label for="inputEmail1">Email address</label>
-                        <input type="email" class="form-control" id="inputEmail1" aria-describedby="emailHelp"
-                            placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone
-                            else.</small>
+                        <h4 class="section-header">Category<h4>
+                        <select class="form-control" id="formControlSelect1">
+                            <option>Bugs and issues</option>
+                            <option>Feature suggestions</option>
+                            <option>Google stuff</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="anonymityCheckbox" id="anonymityCheckbox" value="anonymity"/>
+                        I prefer to keep an air of mystery about me
+                    </label>
+                    <div class="form-group">
+                        <h4 class="section-header">Tell us what is on your mind<h4>
+                        <textarea class="form-control" id="formControlTextarea1" rows="3"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="inputPassword1">Password</label>
-                        <input type="password" class="form-control" id="inputPassword1" placeholder="Password">
-                        <small id="passwordHelp" class="form-text text-muted">The longer, the better.</small>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="button" class="btn btn-outline-secondary" onclick="location.href='/account/reset/'">Forgot password?</button>
+                        <h4 class="section-header">Attach a screenshot</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01">
+                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                          </div>
+                      </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
                 </form>
+
+
             </div>
         </div>
     </div>

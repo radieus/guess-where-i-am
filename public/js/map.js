@@ -28,5 +28,4 @@ function onMapClick(result) {
 
 }
 
-
 map.on('click', onMapClick);

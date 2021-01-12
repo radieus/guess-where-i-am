@@ -9,7 +9,7 @@ const router = express.Router();
  
 router.post('/', async (req, res) => {
  
-    // vlidate the request first
+    // validate the request first
     const { error } = validate(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
@@ -28,8 +28,8 @@ router.post('/', async (req, res) => {
     }
     
     // respond with JWT upon successful login
-    const token = jwt.sign({ _id: user._id }, config.get('privateKey'));
-    res.send(token);
+    const accessToken = user.generateAuthToken();
+    res.json({accessToken});
 });
  
 function validate(req) {

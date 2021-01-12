@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri = "notsoquickmyfriend";
+const uri = "pasteurlhere";
 
 async function InitiateMongoServer() {
   try {
