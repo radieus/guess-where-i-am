@@ -57,4 +57,23 @@ app.get('/account/reset/', function(request, response){
     response.sendFile(__dirname + '/html/reset.html');
 });
 
+app.post('/guess', (req, res) => {
+    //We will receive the latitude and longitude
+    data = req.body;
+    //For the moment the goal latitude and longitude is hardcoded
+    const R = 6371000; // metres
+    const phi1 = data.lat * Math.PI/180; // φ, λ in radians        ç
+    const phi2 = data.latGoal * Math.PI/180;
+    const dphi = (data.latGoal-data.lat) * Math.PI/180;
+    const dlambda = (data.lngGoal-data.lng) * Math.PI/180;
+
+    const a = Math.sin(dphi/2) * Math.sin(dphi/2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dlambda/2) * Math.sin(dlambda/2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+
+    const d = R * c; // in metres
+    distance = {distance: d};
+    res.json(distance);
+
+});
+
 module.exports = app;
