@@ -63,6 +63,7 @@ function makeGuess(){
         }).catch((err)=> console.log(err));
 
 }
+
 map.on('click', onMapClick);
 
 
