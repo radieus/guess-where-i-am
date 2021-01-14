@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const uri = "pasteurlhere";
+const uri = "mongodb+srv://GWIM_user:kKfCfBqYfsuwRy3@cluster0.e56zs.mongodb.net/guess-where-i-am?retryWrites=true&w=majority";
 
 async function InitiateMongoServer() {
   try {
