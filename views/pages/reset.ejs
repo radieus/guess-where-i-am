@@ -6,14 +6,19 @@
 </head>
 
 <body>
+    <% if (isLoggedIn) { %>
     <%- include('../partials/header'); %>
+    <% } else { %>
+    <%- include('../partials/header_noauth'); %>
+    <% } %>
 
     <div class="container">
         <div class="row">
             <div class="col-lg-10 offset-lg-1 content">
                 <h1>Forgot the password?</h1>
 
-                <p>Put your email below and we will send you the link to the page, where you can set a new password. Don't forget to check the spam folder!</p>
+                <p>Put your email below and we will send you the link to the page, where you can set a new password.
+                    Don't forget to check the spam folder!</p>
 
                 <form class="login" method="POST" action="/accounts/signin/">
                     <div class="form-group">
@@ -31,4 +36,3 @@
 </body>
 
 </html>
-

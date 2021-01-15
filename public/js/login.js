@@ -20,9 +20,10 @@ document.getElementById("login").addEventListener("submit", (e) => {
             console.log(response);
             if (response.ok) {
                 console.log('Logged in!');
+                
             }
-            
-            return response.json();
+            window.location.href = window.location.href.substring(0, window.location.href.length - 7);
+            // return response.json();
 
         }).then((data) => {
 

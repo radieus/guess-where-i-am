@@ -30,7 +30,8 @@ router.post('/', async (req, res) => {
     
     // respond with JWT upon successful login
     const accessToken = user.generateAuthToken();
-    res.cookie('token', accessToken, {expires: new Date(Date.now() + 9999999), httpOnly: false}).send({user, token: accessToken});
+    res.cookie('token', accessToken, {expires: new Date(Date.now() + 9999999), httpOnly: false})
+    res.redirect('/');
 });
  
 function validate(req) {
