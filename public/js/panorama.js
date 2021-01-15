@@ -1,4 +1,5 @@
 let panorama;
+var panoramaCoords;
 
 async function getData(url){
     const response = await fetch(url);
@@ -7,12 +8,12 @@ async function getData(url){
 
 async function initialize() {
     //Firstly we get the random coordinates from the server by doing a GET request to /goal
-    var coords = await getData('/goal');
-    console.log(coords);
+    panoramaCoords = await getData('/goal');
+    console.log(panoramaCoords);
 
     panorama = new google.maps.StreetViewPanorama(
         document.getElementById("street-view"), {
-            position: { lat: parseFloat(coords.lat), lng: parseFloat(coords.lng) },
+            position: { lat: parseFloat(panoramaCoords.lat), lng: parseFloat(panoramaCoords.lng) },
             linksControl: false,
             panControl: false,
             enableCloseButton: false,

@@ -1,5 +1,3 @@
-var jwt;
-
 document.getElementById("login").addEventListener("submit", (e) => {
     e.preventDefault();
     var email = document.getElementById('loginInputEmail').value;
@@ -9,6 +7,7 @@ document.getElementById("login").addEventListener("submit", (e) => {
 
     options = {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             'Accept' : 'application/json'
@@ -20,14 +19,13 @@ document.getElementById("login").addEventListener("submit", (e) => {
         .then((response) => {
             console.log(response);
             if (response.ok) {
-                console.log('OK');
+                console.log('Logged in!');
             }
+            
             return response.json();
 
         }).then((data) => {
-            console.log(data);
-            jwt = data['accessToken'];
-            console.log(jwt);
+
         })
         .catch(error => {
             console.log(error);

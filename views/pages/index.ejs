@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <%- include('../partials/header'); %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+                <div class="row justify-content-center">
+                    <div class="col-4">
+                        <p class="title">Guess Where I Am</p>
+                    </div>
+                    <br>
+                    <div class="col-4" style="max-width:1000px; align-self: center;">
+                        <img src="/media/lost-dude.png" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+                <h1 class="section-header">FAQ</h1>
+                <p><strong>What is this?</strong></p>
+                <p>This is a game that uses <a href="http://www.geoguessr.com">Geoguessr</a> as inspiration.</p>
+                <p><strong>How does this work?</strong></p>
+                <p>This site uses Leaflet open-source JavaScript library to help you make your guess about your
+                    localisation and Google Street View API to help you explore the world.</p>
+                <p><strong>But aren't Google APIs paid?</strong></p>
+                <p>They are indeed, therefore to get around this pricing strategy I require you to upload your own API
+                    key. This way Google knows who they are billing - in this case you are billed.</p>
+                <p><strong>But I want to play for free!1!!1!</strong></p>
+                <p>Don't worry, Goggle offers 300$ free credit, which will be more than sufficient your gaming nights.
+                </p>
+                <p><strong>How do I get an API key?</strong></p>
+                <p>Go <a href="https://developers.google.com/maps/documentation/javascript/get-api-key">here</a> and
+                    register to get an API key.</p>
+                <p>Once you have a key save it against your profile <a href="/profile/">here</a>.
+                    <p><strong>Is this safe?</strong></p>
+                    <p>Your keys won't be used for anything other than their stated purpose: namely, for each
+                        individual's games on this site. Apart from your email, no personal details are stored on our
+                        side.</p>
+                    <h4>Stay in and have fun exploring the world!</h4>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

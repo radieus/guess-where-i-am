@@ -1,4 +1,4 @@
-var map = L.map('guess-map').setView([52.22992817667709, 21.00809365510941], 13);
+var map = L.map('guess-map').setView([52.22992817667709, 21.00809365510941], 0.5);
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
@@ -11,18 +11,24 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
 var guessMarker;
 var pointsAccumulated = 0;
 var roundsPlayed = 0;
+var coords;
+var polyline;
+var solution;
 
 async function getData(url){
     const response = await fetch(url);
     return response.json();
 }
 
-function skipRound() {
+async function skipRound() {
     if(roundsPlayed >= 3){
         alert('All rounds played already!');
     }
     //If the user skips we give him 0 points
     //First we update the round counter
+    coords = await getData('/goal'); 
+    console.log(coords);
+    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)})
     roundsPlayed++;
 
     if(roundsPlayed == 3){
@@ -33,6 +39,13 @@ function skipRound() {
 }
 
 function onMapClick(result) {
+    if(solution){
+        map.removeLayer(solution);
+    }
+    if(polyline){
+        map.removeLayer(polyline);
+    }
+
 
     if (guessMarker){
         map.removeLayer(guessMarker);
@@ -62,13 +75,33 @@ async function makeGuess(){
         return;
     }
     //First we get the goal latitude and longitude by doing a GET request to the server
-    var coords = await getData('/goal/get');
+    coords = await getData('/goal/get');
+    //We will display in the map the two markers with a polyline joining them
+    solution = L.marker([coords.lat, coords.lng], {
+        draggable:true,
+        title:"Resource location",
+        alt:"Resource Location",
+        riseOnHover:true
+        }).addTo(map);
+
     //We will extract the latitude and longitude of the marker
     var guessLatLng = guessMarker.getLatLng();
     var lat = guessLatLng.lat;
     var lng = guessLatLng.lng;
+
+    var pointA = new L.LatLng(coords.lat, coords.lng);
+    var pointB = new L.LatLng(lat, lng);
+    var pointList = [pointA, pointB];
+    
+    polyline = new L.Polyline(pointList, {
+        color: 'red',
+        weight: 3,
+        opacity: 0.5,
+        smoothFactor: 1
+    });
+    polyline.addTo(map);
+
     //Now this will be sent to the server via a POST request
-     //Now that we have the 3 words we have to do another request to /slotmachine/saveresult to try to save this result and check its validity
     data = {
         lat: lat,
         lng: lng,
@@ -79,7 +112,8 @@ async function makeGuess(){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-Auth-Token': localStorage.getItem('accessToken')
         },
         body: JSON.stringify(data)
     };
@@ -107,19 +141,21 @@ async function makeGuess(){
     if(roundsPlayed == 3){
         alert(`Congratulations! Your score is ${pointsAccumulated} points!`);
         //We send the points with the username to the server
-        // data = {
-        //     user: ,
-        //     points: pointsAccumulated
-        // };
-        // options = {
-        //     method: 'POST',
-        //     headers: {
-        //         'Content-Type': 'application/json',
-        //         'Accept': 'application/json'
-        //     },
-        //     body: JSON.stringify(data)
-        // };
-    
+        data = {
+            points: pointsAccumulated
+        };
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(data)
+        };
+        fetch('/points', options)
+        .then((response) => {
+            console.log(response);
+        });
         return;
     }
 }
