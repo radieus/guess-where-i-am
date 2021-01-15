@@ -26,8 +26,8 @@ const userSchema = new mongoose.Schema({
 });
 
 // add method to the model
-userSchema.methods.generateAuthToken = function () {
-    const token = jwt.sign({_id: this._id}, 'secureAF');
+userSchema.methods.generateAuthToken = function (res) {
+    const token = jwt.sign({_id: this._id}, config.get('privateKey'), {expiresIn: 600}); // expires in 10 minutes
     return token;
 };
 

@@ -1,6 +1,6 @@
 document.getElementById("registration").addEventListener("submit", (e) => {
     e.preventDefault();
-    
+
     var username = document.getElementById('registrationInputUsername').value;
     var email = document.getElementById('registrationInputEmail').value;
     var password = document.getElementById('registrationInputPassword').value;
@@ -23,6 +23,7 @@ document.getElementById("registration").addEventListener("submit", (e) => {
             console.log(response);
             if (response.ok) {
                 console.log("OK");
+                
             }
             return response.json();
         }).catch(error => {

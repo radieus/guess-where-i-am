@@ -79,7 +79,8 @@ async function makeGuess(){
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
-            'Accept': 'application/json'
+            'Accept': 'application/json',
+            'X-Auth-Token': localStorage.getItem('accessToken')
         },
         body: JSON.stringify(data)
     };

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    
+    <%- include('../partials/header'); %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+
+
+                <h1>Contact us</h1>
+
+                <p>Please select the issue from the dropdown below in order to contact us. You can also attach a screenshot showing whatever you want to show. We will try to respond as quickly as possible.</p>
+
+                <form>
+                    <div class="form-group">
+                        <h4 class="section-header">Category<h4>
+                        <select class="form-control" id="formControlSelect1">
+                            <option>Bugs and issues</option>
+                            <option>Feature suggestions</option>
+                            <option>Google stuff</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+                    <label>
+                        <input type="checkbox" name="anonymityCheckbox" id="anonymityCheckbox" value="anonymity"/>
+                        I prefer to keep an air of mystery about me
+                    </label>
+                    <div class="form-group">
+                        <h4 class="section-header">Tell us what is on your mind<h4>
+                        <textarea class="form-control" id="formControlTextarea1" rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <h4 class="section-header">Attach a screenshot</h4>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text">Upload</span>
+                            </div>
+                            <div class="custom-file">
+                              <input type="file" class="custom-file-input" id="inputGroupFile01">
+                              <label class="custom-file-label" for="inputGroupFile01">Choose file</label>
+                            </div>
+                          </div>
+                      </div>
+                    <button type="submit" class="btn btn-primary">Send</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -25,9 +25,8 @@ document.getElementById("login").addEventListener("submit", (e) => {
             return response.json();
 
         }).then((data) => {
-            console.log(data);
-            jwt = data['accessToken'];
-            console.log(jwt);
+            localStorage.setItem('accessToken', data['accessToken']);
+            console.log(localStorage.getItem('accessToken'));
         })
         .catch(error => {
             console.log(error);

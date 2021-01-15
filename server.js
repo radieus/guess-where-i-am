@@ -5,6 +5,9 @@ const express = require('express');
 const config = require('config');
 const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
+const cors = require('cors')
+const cookieParser = require('cookie-parser');
+
 const mongo = require('./config/db');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
@@ -35,36 +38,43 @@ app.use('/user', users);
 app.use('/auth', auth);
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.set('view engine', 'ejs');
+
+
 app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
 })
 
-app.get('/', function(request, response){
-    response.sendFile(__dirname + '/html/index.html');
+// app.get('/', function(request, response){
+//     response.sendFile(__dirname + '/html/index.html');
+// });
+
+app.get('/', function(request, response) {
+    response.render('pages/index');
 });
 
-app.get('/leaderboard/', function(request, response){
-    response.sendFile(__dirname + '/html/leaderboard.html');
+app.get('/contact/', jwt_auth, function(request, response) {
+    response.render('pages/contact');
 });
 
-app.get('/contact/', function(request, response){
-    response.sendFile(__dirname + '/html/contact.html');
+app.get('/leaderboard/', jwt_auth, function(request, response){
+    response.render('pages/leaderboard');
 });
 
-app.get('/play/', function(request, response){
-    response.sendFile(__dirname + '/html/play.html');
+app.get('/play/', jwt_auth, function(request, response){
+    response.render('pages/play');
 });
 
 app.get('/registration/', function(request, response){
-    response.sendFile(__dirname + '/html/registration.html');
+    response.render('pages/registration');
 });
 
 app.get('/login/', function(request, response){
-    response.sendFile(__dirname + '/html/login.html');
+    response.render('pages/login');
 });
 
-app.get('/account/reset/', function(request, response){
-    response.sendFile(__dirname + '/html/reset.html');
+app.get('/account/reset/', jwt_auth, function(request, response){
+    response.render('pages/reset');
 });
 
 app.post('/guess', jwt_auth, (req, res) => {
@@ -99,7 +109,7 @@ app.post('/guess', jwt_auth, (req, res) => {
 
 });
 
-app.get('/goal', (req, res) => {
+app.get('/goal', jwt_auth, (req, res) => {
     //First we get the random coordinates
     var randCoord = coordArray[Math.floor(Math.random() * coordArray.length)];
     //Now we have a coord like '45.5879673, -73.6341011'
@@ -115,7 +125,7 @@ app.get('/goal', (req, res) => {
     res.json(coords);
 });
 
-app.get('/goal/get', (req, res) => {
+app.get('/goal/get', jwt_auth, (req, res) => {
     var coords = {
         lat: latGoal,
         lng: lngGoal
