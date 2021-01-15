@@ -5,7 +5,12 @@
 </head>
 
 <body>
+
+    <% if (isLoggedIn) { %>
     <%- include('../partials/header'); %>
+    <% } else { %>
+    <%- include('../partials/header_noauth'); %>
+    <% } %>
 
     <div class="container">
         <div class="row">

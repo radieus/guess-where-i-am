@@ -45,42 +45,38 @@ app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
 })
 
+var isLoggedIn = false;
 
-// app.get('/play/', function(request, response){
-//     response.sendFile(__dirname + '/html/play.html');
-// });
-
-app.get('/', function(request, response) {
-    response.render('pages/index');
+app.get('/', jwt_auth, function(request, response) {
+    response.render('pages/index', {isLoggedIn : request.logged});
 });
 
 app.get('/contact/', jwt_auth, function(request, response) {
-    response.render('pages/contact');
+    response.render('pages/contact', {isLoggedIn : request.logged});
 });
 
-app.get('/leaderboard/', jwt_auth, function(request, response){
-    response.render('pages/leaderboard');
+app.get('/leaderboard/', jwt_auth, function(request, response) {
+    response.render('pages/leaderboard', {isLoggedIn : request.logged});
 });
 
-app.get('/play/', jwt_auth, function(request, response){
-    response.render('pages/play');
+app.get('/play/', jwt_auth, function(request, response) {
+    response.render('pages/play', {isLoggedIn : request.logged});
 });
 
-app.get('/registration/', function(request, response){
-    response.render('pages/registration');
+app.get('/registration/', jwt_auth, function(request, response){
+    response.render('pages/registration', {isLoggedIn : request.logged});
 });
 
-app.get('/login/', function(request, response){
-    response.render('pages/login');
+app.get('/login/', jwt_auth, function(request, response){
+    response.render('pages/login', {isLoggedIn : request.logged});
 });
 
 app.get('/account/reset/', jwt_auth, function(request, response){
-    response.render('pages/reset');
+    response.render('pages/reset', {isLoggedIn : request.logged});
 
 });
 
 app.get('/logout/', function (request, response) {
-    app.set('isLoggedIn', false);
     response.cookie('token', {}, {maxAge: -1});
     response.redirect('/')
 });
