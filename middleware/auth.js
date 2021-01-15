@@ -2,8 +2,8 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
  
 module.exports = function (req, res, next) {
- 
-    const token = req.header('x-auth-token');
+    const token = req.header('Cookie').split(/=(.+)/)[1];
+    console.log(token);
     if (!token) {
         return res.redirect('/login/');
     }
@@ -14,6 +14,7 @@ module.exports = function (req, res, next) {
         next();
     }
     catch (ex) {
+        console.log(ex);
         return res.redirect('/login/');
     }
 }

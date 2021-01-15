@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User } = require('../models/user');
 const express = require('express');
+const { nextTick } = require('process');
 const router = express.Router();
  
 router.post('/', async (req, res) => {
@@ -29,7 +30,7 @@ router.post('/', async (req, res) => {
     
     // respond with JWT upon successful login
     const accessToken = user.generateAuthToken();
-    res.json({accessToken});
+    res.cookie('token', accessToken, {expires: new Date(Date.now() + 9999999), httpOnly: false}).send({user, token: accessToken});
 });
  
 function validate(req) {

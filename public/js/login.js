@@ -9,6 +9,7 @@ document.getElementById("login").addEventListener("submit", (e) => {
 
     options = {
         method: 'POST',
+        credentials: 'include',
         headers: {
             'Content-Type': 'application/json',
             'Accept' : 'application/json'
@@ -20,13 +21,12 @@ document.getElementById("login").addEventListener("submit", (e) => {
         .then((response) => {
             console.log(response);
             if (response.ok) {
-                console.log('OK');
+                console.log('Logged in!');
             }
             return response.json();
 
         }).then((data) => {
-            localStorage.setItem('accessToken', data['accessToken']);
-            console.log(localStorage.getItem('accessToken'));
+
         })
         .catch(error => {
             console.log(error);
