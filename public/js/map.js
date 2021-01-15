@@ -107,18 +107,18 @@ async function makeGuess(){
     if(roundsPlayed == 3){
         alert(`Congratulations! Your score is ${pointsAccumulated} points!`);
         //We send the points with the username to the server
-        data = {
-            user: ,
-            points: pointsAccumulated
-        };
-        options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
+        // data = {
+        //     user: ,
+        //     points: pointsAccumulated
+        // };
+        // options = {
+        //     method: 'POST',
+        //     headers: {
+        //         'Content-Type': 'application/json',
+        //         'Accept': 'application/json'
+        //     },
+        //     body: JSON.stringify(data)
+        // };
     
         return;
     }

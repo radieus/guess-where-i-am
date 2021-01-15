@@ -1,6 +1,7 @@
+var jwt;
+
 document.getElementById("login").addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("login!")
     var email = document.getElementById('loginInputEmail').value;
     var password = document.getElementById('loginInputPassword').value;
 
@@ -19,12 +20,16 @@ document.getElementById("login").addEventListener("submit", (e) => {
         .then((response) => {
             console.log(response);
             if (response.ok) {
-                console.log(response.body);
-                //var jwt = response.GetHeaderValue("X-BB-SESSION");
-
+                console.log('OK');
             }
             return response.json();
-        }).catch(error => {
+
+        }).then((data) => {
+            console.log(data);
+            jwt = data['accessToken'];
+            console.log(jwt);
+        })
+        .catch(error => {
             console.log(error);
         });
 });

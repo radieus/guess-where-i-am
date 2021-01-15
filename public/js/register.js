@@ -1,7 +1,6 @@
-console.log("loaded!")
 document.getElementById("registration").addEventListener("submit", (e) => {
     e.preventDefault();
-    console.log("registration!")
+    
     var username = document.getElementById('registrationInputUsername').value;
     var email = document.getElementById('registrationInputEmail').value;
     var password = document.getElementById('registrationInputPassword').value;

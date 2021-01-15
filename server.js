@@ -1,5 +1,6 @@
 const Joi = require('joi');
 const path = require('path');
+const http = require('http');
 const express = require('express');
 const config = require('config');
 const { v4: uuidv4 } = require('uuid');
@@ -7,6 +8,8 @@ const mongoose = require('mongoose');
 const mongo = require('./config/db');
 const users = require('./routes/users');
 const auth = require('./routes/auth');
+const jwt_auth = require('./middleware/auth');
+
 var latGoal;
 var lngGoal;
 
@@ -16,7 +19,7 @@ function inRange(x, min, max) {
     return (min <= x && x <= max);
   }
 
-// check if privateKey is defined (./config/custom-environmental-variables.json)
+// check if privateKey is defined
 if (!config.get('privateKey')) {
     console.error('[ERROR]: privateKey is not defined.');
     process.exit(1);
@@ -64,7 +67,8 @@ app.get('/account/reset/', function(request, response){
     response.sendFile(__dirname + '/html/reset.html');
 });
 
-app.post('/guess', (req, res) => {
+app.post('/guess', jwt_auth, (req, res) => {
+    console.log(req.body);
     //We will receive the latitude and longitude
     data = req.body;
     //For the moment the goal latitude and longitude is hardcoded
@@ -118,4 +122,5 @@ app.get('/goal/get', (req, res) => {
     };
     res.json(coords);
 });
+
 module.exports = app;
