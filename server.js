@@ -47,8 +47,8 @@ app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
 })
 
-// app.get('/', function(request, response){
-//     response.sendFile(__dirname + '/html/index.html');
+// app.get('/play/', function(request, response){
+//     response.sendFile(__dirname + '/html/play.html');
 // });
 
 app.get('/', function(request, response) {
