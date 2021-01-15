@@ -45,9 +45,7 @@ app.set('view engine', 'ejs');
 
 app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
-})
-
-var isLoggedIn = false;
+});
 
 app.get('/', jwt_auth, function(request, response) {
     response.render('pages/index', {isLoggedIn : request.logged});

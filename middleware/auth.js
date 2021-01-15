@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const config = require('config');
  
 module.exports = function (req, res, next) {
-    console.log(req);
     req.logged = true;
     try {
         const token = req.header('Cookie');

@@ -23,8 +23,8 @@ document.getElementById("registration").addEventListener("submit", (e) => {
             console.log(response);
             if (response.ok) {
                 console.log("OK");
-                
             }
+            window.location.href = window.location.href.substring(0, window.location.href.length - 13);
             return response.json();
         }).catch(error => {
             console.log(error);
