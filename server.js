@@ -39,13 +39,12 @@ app.use('/user', users);
 app.use('/auth', auth);
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.set('view engine', 'ejs');
-
 
 app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
 })
+
 
 // app.get('/play/', function(request, response){
 //     response.sendFile(__dirname + '/html/play.html');
@@ -77,6 +76,13 @@ app.get('/login/', function(request, response){
 
 app.get('/account/reset/', jwt_auth, function(request, response){
     response.render('pages/reset');
+
+});
+
+app.get('/logout/', function (request, response) {
+    app.set('isLoggedIn', false);
+    response.cookie('token', {}, {maxAge: -1});
+    response.redirect('/')
 });
 
 app.post('/guess', jwt_auth, (req, res) => {

@@ -1,5 +1,3 @@
-var jwt;
-
 document.getElementById("login").addEventListener("submit", (e) => {
     e.preventDefault();
     var email = document.getElementById('loginInputEmail').value;
@@ -23,6 +21,7 @@ document.getElementById("login").addEventListener("submit", (e) => {
             if (response.ok) {
                 console.log('Logged in!');
             }
+            
             return response.json();
 
         }).then((data) => {
