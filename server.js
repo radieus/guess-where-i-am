@@ -10,6 +10,7 @@ const jwt = require("jsonwebtoken");
 
 const mongo = require('./config/db');
 const users = require('./routes/users');
+const games = require('./routes/games');
 const auth = require('./routes/auth');
 const jwt_auth = require('./middleware/auth');
 
@@ -37,6 +38,7 @@ app.use(express.json());
 app.use(cookieParser());
 app.disable('x-powered-by');
 app.use('/user', users);
+app.use('/game', games);
 app.use('/auth', auth);
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -111,6 +113,7 @@ app.post('/guess', jwt_auth, (req, res) => {
 
     const d = R * c; // in meters
     distance = Math.ceil(d / 1000);
+
     // now that we have the distance in kilometers, let's compute the points
     var points = 0.0
     if (inRange(distance, 1, 2)) {

@@ -8,7 +8,7 @@ const router = express.Router();
  
 router.post('/', async (req, res) => {
     // validate the request first
-    const { error } = validate(req.body);
+    const { error } = validateUser(req.body);
     if (error) {
         return res.status(400).send(error.details[0].message);
     }
@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
         // send token in the header in the response
         // const token = user.generateAuthToken();
         // res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
-        res.send(_.pick(user, ['_id', 'name', 'email']));
+        res.send(_.pick(user, ['_id', 'username', 'email']));
     }
 });
  
