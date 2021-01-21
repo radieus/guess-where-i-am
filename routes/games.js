@@ -28,12 +28,18 @@ router.post('/', async (req, res) => {
 
 router.get('/scores', async (req, res) => {
     // JSON of higest scores for each player
-    var col = db.dbObj.collection('games').aggregate([
+    var col = db.dbObj.collection('games').aggregate(   
+        {     
+            $group: {_id: '$username', "score": {$max:"$score"}} 
+        },
+        { 
+            $addFields: { "username": "$_id" }
+        },
         {
-           $group:{_id:"$username", "score": {$max:"$score"}}
+            $project: { _id: false }
         }
-    ]).toArray(function(err, documents) {
-      res.send(documents);
+        ).toArray(function(err, scores) {
+      res.send(scores);
     });
 });
 
