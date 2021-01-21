@@ -3,7 +3,6 @@ const path = require('path');
 const http = require('http');
 const express = require('express');
 const config = require('config');
-const { v4: uuidv4 } = require('uuid');
 const mongoose = require('mongoose');
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
@@ -22,7 +21,7 @@ var coordArray = ['45.5879673, -73.6341011', '49.766738, -94.490688', '42.30993,
 
 function inRange(x, min, max) {
     return (min <= x && x <= max);
-  }
+}
 
 // check if privateKey is defined
 if (!config.get('privateKey')) {
@@ -47,79 +46,98 @@ app.listen(process.env.PORT || 3001, () => {
     console.log('listening at 3001')
 });
 
-app.get('/', jwt_auth, function(request, response) {
-    response.render('pages/index', {isLoggedIn : request.logged});
+app.get('/', jwt_auth, function (request, response) {
+    response.render('pages/index', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/contact/', jwt_auth, function(request, response) {
-    response.render('pages/contact', {isLoggedIn : request.logged});
+app.get('/contact/', jwt_auth, function (request, response) {
+    response.render('pages/contact', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/leaderboard/', jwt_auth, function(request, response) {
-    response.render('pages/leaderboard', {isLoggedIn : request.logged});
+app.get('/leaderboard/', jwt_auth, function (request, response) {
+    response.render('pages/leaderboard', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/play/', jwt_auth, function(request, response) {
-    response.render('pages/play', {isLoggedIn : request.logged});
+app.get('/play/', jwt_auth, function (request, response) {
+    response.render('pages/play', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/registration/', jwt_auth, function(request, response){
-    response.render('pages/registration', {isLoggedIn : request.logged});
+app.get('/registration/', jwt_auth, function (request, response) {
+    response.render('pages/registration', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/login/', jwt_auth, function(request, response){
-    response.render('pages/login', {isLoggedIn : request.logged});
+app.get('/login/', jwt_auth, function (request, response) {
+    response.render('pages/login', {
+        isLoggedIn: request.logged
+    });
 });
 
-app.get('/account/reset/', jwt_auth, function(request, response){
-    response.render('pages/reset', {isLoggedIn : request.logged});
-
+app.get('/account/reset/', jwt_auth, function (request, response) {
+    response.render('pages/reset', {
+        isLoggedIn: request.logged
+    });
 });
 
 app.get('/logout/', function (request, response) {
-    response.cookie('token', {}, {maxAge: -1});
+    response.cookie('token', {}, {
+        maxAge: -1
+    });
     response.redirect('/')
 });
 
 app.post('/guess', jwt_auth, (req, res) => {
     console.log(req.body);
-    //We will receive the latitude and longitude
+    // we will receive the latitude and longitude
     data = req.body;
-    //For the moment the goal latitude and longitude is hardcoded
-    const R = 6371000; // metres
-    const phi1 = data.lat * Math.PI/180; // φ, λ in radians        ç
-    const phi2 = data.latGoal * Math.PI/180;
-    const dphi = (data.latGoal-data.lat) * Math.PI/180;
-    const dlambda = (data.lngGoal-data.lng) * Math.PI/180;
+    // for the moment the goal latitude and longitude is hardcoded
+    const R = 6371000; // meters
+    const phi1 = data.lat * Math.PI / 180; // φ, λ in radians, ç
+    const phi2 = data.latGoal * Math.PI / 180;
+    const dphi = (data.latGoal - data.lat) * Math.PI / 180;
+    const dlambda = (data.lngGoal - data.lng) * Math.PI / 180;
 
-    const a = Math.sin(dphi/2) * Math.sin(dphi/2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dlambda/2) * Math.sin(dlambda/2);
-    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    const a = Math.sin(dphi / 2) * Math.sin(dphi / 2) + Math.cos(phi1) * Math.cos(phi2) * Math.sin(dlambda / 2) * Math.sin(dlambda / 2);
+    const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-    const d = R * c; // in metres
+    const d = R * c; // in meters
     distance = Math.ceil(d / 1000);
-    //Now that we have the distance in kilometers let's compute the points
+    // now that we have the distance in kilometers, let's compute the points
     var points = 0.0
-    if (inRange(distance, 1, 2)) {         
-        points = 10000.0;       
+    if (inRange(distance, 1, 2)) {
+        points = 10000.0;
     }
-    if (distance >= 5000){
+    if (distance >= 5000) {
         points = 0.0;
     } else {
         points = (-2.2492956868105) * distance + 10004.49859137362
     }
 
-    response = {points: points};
+    response = {
+        points: points
+    };
     res.json(response);
 
 });
 
 app.get('/goal', jwt_auth, (req, res) => {
-    //First we get the random coordinates
+    // first we get the random coordinates
     var randCoord = coordArray[Math.floor(Math.random() * coordArray.length)];
-    //Now we have a coord like '45.5879673, -73.6341011'
+
+    // now we have a coord, e.g. '45.5879673, -73.6341011'
     coordArrayLatLongs = randCoord.replace(/ [\])}[{(] /g, '').split(',');
     console.log(coordArrayLatLongs);
-    //We create the json we will send back to the user
+
+    // we create the JSON we will send back to the user
     var coords = {
         lat: coordArrayLatLongs[0],
         lng: coordArrayLatLongs[1]
@@ -139,22 +157,17 @@ app.get('/goal/get', jwt_auth, (req, res) => {
 
 
 app.post('/points', jwt_auth, (req, res) => {
-    //We will store the points of the user with it's id
+    // we will store the points of the user with it's id
     var token = req.header('Cookie');
 
-    //Let's extract the points too
+    // let's extract the points too
     data = req.body;
     points = data.points;
 
     // to get just the token (splits after =)
     var my_jwt = token.split(/=(.+)/)[1];
-
     decoded = jwt.verify(my_jwt, config.get('privateKey'));
-
-    console.log(decoded['_id']);
-
     pointsArray.push([decoded['_id'], points]);
-
     res.send('Your point total was sent to the server!');
 });
 

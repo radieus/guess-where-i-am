@@ -3,6 +3,8 @@ const config = require('config');
  
 module.exports = function (req, res, next) {
     req.logged = true;
+
+    // console.log(req)
     try {
         const token = req.header('Cookie');
         if (!token) {
@@ -13,7 +15,9 @@ module.exports = function (req, res, next) {
             if (req.originalUrl == '/') {
                 next();
             }
-            return res.redirect('/login/');
+            if (req.originalUrl == '/registration/') {
+                next();
+            }
         }
         else {
             var my_jwt = token.split(/=(.+)/)[1];
@@ -23,7 +27,7 @@ module.exports = function (req, res, next) {
     catch (ex1) {
         // will print error when trying to access endpoint with no jwt verified
         req.logged = false;
-        console.log(ex1);
+        // console.log(ex1);
     }
  
     try {
@@ -33,8 +37,8 @@ module.exports = function (req, res, next) {
         next();
     }
     catch (ex2) {
-        console.log(ex2);
+        // console.log(ex2);
         req.logged = false;
-        return res.redirect('/login/');
+        res.redirect('/login/');
     }
 }

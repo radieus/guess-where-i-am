@@ -30,7 +30,7 @@ router.post('/', async (req, res) => {
     
     // respond with JWT upon successful login
     const accessToken = user.generateAuthToken();
-    res.cookie('token', accessToken, {expires: new Date(Date.now() + 9999999), httpOnly: false})
+    res.cookie('token', accessToken, {httpOnly: false})
     res.redirect('/');
 });
  
