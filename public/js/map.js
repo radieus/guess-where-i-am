@@ -45,7 +45,6 @@ function onMapClick(result) {
         map.removeLayer(polyline);
     }
 
-
     if (guessMarker){
         map.removeLayer(guessMarker);
     }
@@ -63,6 +62,14 @@ function onMapClick(result) {
 }
 
 async function makeGuess(){
+
+    if(solution){
+        map.removeLayer(solution);
+    }
+    if(polyline){
+        map.removeLayer(polyline);
+    }
+
     if(roundsPlayed >= 3){
         alert('You already played the 3 rounds!');
         return;
