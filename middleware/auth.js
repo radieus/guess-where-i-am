@@ -20,6 +20,7 @@ module.exports = function (req, res, next) {
                 return next();
             }
             else if (req.originalUrl == '/auth/forgotpassword/') {
+
                 return next();
             }
         }

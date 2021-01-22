@@ -20,21 +20,34 @@ async function getData(url){
     return response.json();
 }
 
-async function skipRound() {
-    if(roundsPlayed >= 3){
-        alert('All rounds played already!');
-    }
+async function roundSkip() {
+    //To give the user 0 points we POST to /skip
+    options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+    };
 
-    //If the user skips we give him 0 points
+    fetch('/skip', options)
+    .then((response) => response.json())
+    .then((responseJSON) =>{
+        console.log(responseJSON);
+        alert("You skipped a round so you don't win any points!");
+        if(responseJSON.redirect == true){
+            alert("Your final score is: " + pointsAccumulated);
+            //We redirect to the home screen
+            window.location.href = window.location.href.substring(0, window.location.href.length - 6);
+        }
+    })
+    .catch((err)=> console.log(err));
+
+
     //First we update the round counter
     coords = await getData('/goal'); 
     console.log(coords);
-    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)})
-    roundsPlayed++;
-
-    if(roundsPlayed == 3){
-        alert('You finished the game with THIS score!');
-    }
+    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)});
 }
 
 function onMapClick(result) {
@@ -44,7 +57,6 @@ function onMapClick(result) {
     if(polyline){
         map.removeLayer(polyline);
     }
-
 
     if (guessMarker){
         map.removeLayer(guessMarker);
@@ -63,6 +75,14 @@ function onMapClick(result) {
 }
 
 async function makeGuess(){
+
+    if(solution){
+        map.removeLayer(solution);
+    }
+    if(polyline){
+        map.removeLayer(polyline);
+    }
+
     if(roundsPlayed >= 3){
         alert('You already played the 3 rounds!');
         return;
@@ -123,41 +143,21 @@ async function makeGuess(){
         .then((response) => response.json())
         .then((responseJSON) => {
             // do stuff with responseJSON here...
-            console.log(responseJSON);
-            alert(responseJSON.points);
+            alert("You scored: "+responseJSON.points+ " from being "+ responseJSON.distance+ " kilometers away");
             pointsAccumulated += responseJSON.points;
+            if(responseJSON.redirect == true){
+                //We show the user his final score
+                alert("Your final score is: " + pointsAccumulated);
+                //We redirect to the home screen
+                window.location.href = window.location.href.substring(0, window.location.href.length - 6);
+            }
         }).catch((err) => console.log(err));
-
-    // TODO: Calculate the points based on the distance from the point
 
     // Next round 
     // We change the latitude and longitude of the panorama
-    coords = await getData('/goal'); 
-    console.log(coords);
-    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)})
-    roundsPlayed++;
+    coords = await getData('/goal');
+    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)});
 
-    // If the user has already played 3 rounds we will display a message with his points
-    if(roundsPlayed == 3){
-        alert(`Congratulations! Your score is ${pointsAccumulated} points!`);
-        //We send the points with the username to the server
-        data = {
-            points: pointsAccumulated
-        };
-        options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
-        fetch('/points', options)
-        .then((response) => {
-            console.log(response);
-        });
-        return;
-    }
 }
 
 map.on('click', onMapClick);
