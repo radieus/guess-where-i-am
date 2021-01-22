@@ -192,9 +192,45 @@ app.post('/guess', jwt_auth, async function (req, res) {
 
     //We will also load the points and add 1 to the 
     res.json(response);
-
 });
 
+app.post('/skip', jwt_auth, async function (req, res){
+    var redirectBool = false;
+    //When the user does a POST request to skip we add a round to his 
+    var token = req.header('Cookie');
+    var my_jwt = token.split(/=(.+)/)[1];
+    var decoded = jwt.verify(my_jwt, config.get('privateKey'));
+    var id = decoded['_id'];
+    let user = await User.findOne({ _id: id });
+    if (user) {
+        unameJSON = (_.pick(user, 'username'));
+        username = unameJSON.username;
+    }
+        //Now that we have the username we will check if it is in the dictionaries
+    if(!(username in dictRounds)){
+        //Then we add an entry with 1 round since this is the first one
+        dictRounds[username] = 1;
+        dictPoints[username] = 0;
+        redirectBool = false;
+    }else{
+        //Add 1 to the roundsPlayed
+        dictRounds[username]++;
+        console.log(dictRounds[username]);
+        redirectBool = false;
+        if(dictRounds[username] == 3){
+            //We change the redirectBool
+            redirectBool = true;
+            dictRounds[username] = 0;
+            dictPoints[username] = 0;
+        }
+    }
+
+    response = {
+        redirect: redirectBool
+    };
+
+    res.json(response);
+});
 
 app.get('/goal', jwt_auth, (req, res) => {
     // first we get the random coordinates

@@ -20,21 +20,34 @@ async function getData(url){
     return response.json();
 }
 
-async function skipRound() {
-    if(roundsPlayed >= 3){
-        alert('All rounds played already!');
-    }
+async function roundSkip() {
+    //To give the user 0 points we POST to /skip
+    options = {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+        }
+    };
 
-    //If the user skips we give him 0 points
+    fetch('/skip', options)
+    .then((response) => response.json())
+    .then((responseJSON) =>{
+        console.log(responseJSON);
+        alert("You skipped a round so you don't win any points!");
+        if(responseJSON.redirect == true){
+            alert("Your final score is: " + pointsAccumulated);
+            //We redirect to the home screen
+            window.location.href = window.location.href.substring(0, window.location.href.length - 6);
+        }
+    })
+    .catch((err)=> console.log(err));
+
+
     //First we update the round counter
     coords = await getData('/goal'); 
     console.log(coords);
-    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)})
-    roundsPlayed++;
-
-    if(roundsPlayed == 3){
-        alert('You finished the game with THIS score!');
-    }
+    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)});
 }
 
 function onMapClick(result) {
