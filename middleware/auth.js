@@ -10,13 +10,13 @@ module.exports = function (req, res, next) {
         if (!token) {
             req.logged = false;
             if (req.originalUrl == '/login/') {
-                next();
+                return next();
             }
             if (req.originalUrl == '/') {
-                next();
+                return next();
             }
             if (req.originalUrl == '/registration/') {
-                next();
+                return next();
             }
         }
         else {

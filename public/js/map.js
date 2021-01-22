@@ -123,41 +123,21 @@ async function makeGuess(){
         .then((response) => response.json())
         .then((responseJSON) => {
             // do stuff with responseJSON here...
-            console.log(responseJSON);
-            alert(responseJSON.points);
+            alert("You scored: "+responseJSON.points+ " from being "+ responseJSON.distance+ " kilometers away");
             pointsAccumulated += responseJSON.points;
+            if(responseJSON.redirect == true){
+                //We show the user his final score
+                alert("Your final score is: " + pointsAccumulated);
+                //We redirect to the home screen
+                window.location.href = window.location.href.substring(0, window.location.href.length - 6);
+            }
         }).catch((err) => console.log(err));
-
-    // TODO: Calculate the points based on the distance from the point
 
     // Next round 
     // We change the latitude and longitude of the panorama
-    coords = await getData('/goal'); 
-    console.log(coords);
-    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)})
-    roundsPlayed++;
+    coords = await getData('/goal');
+    panorama.setPosition({lat: parseFloat(coords.lat), lng: parseFloat(coords.lng)});
 
-    // If the user has already played 3 rounds we will display a message with his points
-    if(roundsPlayed == 3){
-        alert(`Congratulations! Your score is ${pointsAccumulated} points!`);
-        //We send the points with the username to the server
-        data = {
-            points: pointsAccumulated
-        };
-        options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Accept': 'application/json'
-            },
-            body: JSON.stringify(data)
-        };
-        fetch('/points', options)
-        .then((response) => {
-            console.log(response);
-        });
-        return;
-    }
 }
 
 map.on('click', onMapClick);
