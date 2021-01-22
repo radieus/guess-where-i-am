@@ -20,6 +20,7 @@
   "homepage": "https://github.com/radieus/guess-where-i-am#readme",
   "dependencies": {
     "bcrypt": "^5.0.0",
+    "bower": "^1.8.12",
     "config": "^3.3.3",
     "cookie-parser": "^1.4.5",
     "cors": "^2.8.5",
@@ -35,6 +36,7 @@
     "mongoose": "^5.11.11",
     "moongoose": "^0.0.4",
     "nodemon": "^2.0.6",
+    "remodal": "^1.1.1",
     "uuid": "^8.3.2"
   }
 }

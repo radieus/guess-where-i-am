@@ -16,6 +16,12 @@ module.exports = function (req, res, next) {
             else if (req.originalUrl == '/registration/') {
                 return next();
             }
+            else if (req.originalUrl == '/auth/reset/') {
+                return next();
+            }
+            else if (req.originalUrl == '/auth/forgotpassword/') {
+                return next();
+            }
         }
         else {
             var my_jwt = token.split(/=(.+)/)[1];
@@ -29,7 +35,7 @@ module.exports = function (req, res, next) {
     }
  
     try {
-        const decoded = jwt.verify(my_jwt, config.get('privateKey'));
+        const decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
         req.user = decoded;
         console.log(decoded);
         next();

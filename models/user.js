@@ -35,13 +35,13 @@ const userSchema = new mongoose.Schema({
 
 // add method to the model
 userSchema.methods.generateAuthToken = function (res) {
-    const token = jwt.sign({_id: this._id}, config.get('privateKey'), {expiresIn: 999999});
+    const token = jwt.sign({_id: this._id}, config.get('PRIVATE_KEY'), {expiresIn: 999999});
     return token;
 };
 
 userSchema.methods.generateForgotPasswordToken = function (res) {
-    const token = jwt.sign({_id: this._id}, config.get('privateKey') + 'abc', {expiresIn: 999999});
-    return token;
+    const forgotPasswordToken = jwt.sign({_id: this._id}, config.get('RESET_PASSWORD_KEY'), {expiresIn: 999999});
+    return forgotPasswordToken;
 };
 
 

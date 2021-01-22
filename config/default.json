@@ -1,3 +1,6 @@
 {
-    "privateKey": "secureAF"
+    "PRIVATE_KEY": "a",
+    "RESET_PASSWORD_KEY": "a",
+    "CLIENT_URL": "a",
+    "MAILGUN_KEY": "a"
 }

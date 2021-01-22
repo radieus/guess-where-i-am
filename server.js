@@ -4,6 +4,7 @@ const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
 const cookieParser = require('cookie-parser');
+const { User } = require('./models/user');
 const jwt = require("jsonwebtoken");
 
 const mongo = require('./config/db');
@@ -22,9 +23,9 @@ function inRange(x, min, max) {
     return (min <= x && x <= max);
 }
 
-// check if privateKey is defined
-if (!config.get('privateKey')) {
-    console.error('[ERROR]: privateKey is not defined.');
+// check if PRIVATE_KEY is defined
+if (!config.get('PRIVATE_KEY')) {
+    console.error('[ERROR]: PRIVATE_KEY is not defined.');
     process.exit(1);
 }
 
@@ -82,11 +83,26 @@ app.get('/login/', jwt_auth, function (request, response) {
     });
 });
 
-app.get('/account/reset/', jwt_auth, function (request, response) {
-    response.render('pages/reset', {
+app.get('/auth/forgotpassword/', jwt_auth, function (request, response) {
+    response.render('pages/forgotpassword', {
         isLoggedIn: request.logged
     });
 });
+
+app.get('/auth/reset/:token', function (request, response) {
+    User.findOne({
+        resetLink: request.params.token
+    }, function (err, user) {
+        if (!user) {
+            alert('Password reset token is invalid or has expired.');
+            return response.redirect('/auth/forgotpassword/');
+        }
+        response.render('pages/reset', {
+            isLoggedIn: request.logged
+        });
+    });
+});
+
 
 app.get('/logout/', function (request, response) {
     response.cookie('token', {}, {
@@ -167,7 +183,7 @@ app.post('/points', jwt_auth, (req, res) => {
 
     // to get just the token (splits after =)
     var my_jwt = token.split(/=(.+)/)[1];
-    decoded = jwt.verify(my_jwt, config.get('privateKey'));
+    decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
     pointsArray.push([decoded['_id'], points]);
     res.send('Your point total was sent to the server!');
 });
