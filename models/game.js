@@ -1,6 +1,6 @@
 const Joi = require('joi');
 const mongoose = require('mongoose');
-const db = require('../config/db');
+// const db = require('../config/db');
  
 const gameSchema = new mongoose.Schema({
     username: {

@@ -1,5 +1,5 @@
 const _ = require('lodash');
-const { Game, validateGame, getHighestScores } = require('../models/game');
+const { Game, validateGame } = require('../models/game');
 const { User, validateUser } = require('../models/user');
 const db = require('../config/db');
 
@@ -27,6 +27,16 @@ router.post('/', async (req, res) => {
     }
 });
 
+function sortResults(data, prop, asc) {
+    data.sort(function(a, b) {
+        if (asc) {
+            return (a[prop] > b[prop]) ? 1 : ((a[prop] < b[prop]) ? -1 : 0);
+        } else {
+            return (b[prop] > a[prop]) ? 1 : ((b[prop] < a[prop]) ? -1 : 0);
+        }
+    });
+}
+
 router.get('/scores', async (req, res) => {
     // JSON of higest scores for each player
     var col = db.dbObj.collection('games').aggregate(   
@@ -39,9 +49,7 @@ router.get('/scores', async (req, res) => {
         {
             $project: { _id: false }
         }).toArray(function(err, scores) {
-            scores.sort(function(a, b) {
-                return a.score < b.score;
-            });
+            sortResults(scores, "score", false);
         res.send(scores);
     });
 });
