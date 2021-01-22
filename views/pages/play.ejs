@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAACl5TgLhVCJWmFAntSNqk6fBHVYVg2l8&callback=initialize&libraries=&v=weekly" defer></script>
+</head>
+
+<body>
+    <!--The panel containing the Streetview-->
+    <div id="street-view"></div>
+    <div id="guess-map"></div>
+    <button type="submit" class="btn btn-primary btn-lg playbuttons" onclick="makeGuess()">Make a guess</button>
+    <button type="submit" class="btn btn-warning btn-lg playbuttons" onclick="roundSkip()">Skip</button>
+    <button type="submit" class="btn btn-info btn-lg playbuttons">Reload</button>
+    <script src="/js/panorama.js"></script>
+    <script src="/js/map.js"></script>
+
+</body>
+
+</html>

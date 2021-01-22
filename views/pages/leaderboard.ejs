@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <% if (isLoggedIn) { %>
+    <%- include('../partials/header'); %>
+    <% } else { %>
+    <%- include('../partials/header_noauth'); %>
+    <% } %>
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+
+                <h1>Leaderboard</h1>
+
+                <p>Below you can find the best scores achieved by all the players. Join them and fight your way to the
+                    top!</p>
+
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Nickname</th>
+                            <th scope="col">Best score</th>
+
+                        </tr>
+                    </thead>
+                    <tbody id="tb"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="/js/leaderboard.js"></script>
+</body>
+
+</html>

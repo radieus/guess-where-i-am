@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <% if (isLoggedIn) { %>
+    <%- include('../partials/header'); %>
+    <% } else { %>
+    <%- include('../partials/header_noauth'); %>
+    <% } %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+                <h1>Sign Up</h1>
+
+                <form id="registration" class="registration">
+                    <div class="form-group">
+                        <label for="registrationInputEmail">Email address</label>
+                        <input type="email" class="form-control" id="registrationInputEmail"
+                            aria-describedby="registrationEmailHelp" placeholder="user@example.com" minlength=5
+                            maxlength=2255 required>
+                        <small id="registrationEmailHelp" class="form-text text-muted">We'll never share your email with
+                            anyone
+                            else.</small>
+                    </div>
+                    <label for="registrationInputUsername">Username</label>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">@</span>
+                        </div>
+                        <input type="text" class="form-control" id="registrationInputUsername"
+                            placeholder="Enter username" minlength=3 maxlength=20 required>
+                        <div class="invalid-feedback" style="width: 100%;">
+                            Your nickname is required.
+                        </div>
+                    </div>
+                    <small id="registrationPasswordHelp" class="form- text text-muted" style="margin-bottom: 1rem;">This
+                        is how other players will see you.</small>
+                    <div class="form-group">
+                        <label for="registrationInputPassword">Password</label>
+                        <input type="password" class="form-control" id="registrationInputPassword"
+                            placeholder="Enter password" minlength=12 maxlength=255 required>
+                        <small id="registrationPasswordHelp" class="form-text text-muted">The longer, the
+                            better.</small>
+                    </div>
+                    <button id="registrationSubmitButton" type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/js/register.js"></script>
+</body>
+
+</html>

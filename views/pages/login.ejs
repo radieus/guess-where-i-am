@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <% if (isLoggedIn) { %>
+    <%- include('../partials/header'); %>
+    <% } else { %>
+    <%- include('../partials/header_noauth'); %>
+    <% } %>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 offset-lg-1 content">
+                <h1>Sign In</h1>
+
+                <p>If you have not created an account yet, please <a href="/registration/">sign up</a> first.</p>
+
+                <form id="login" class="login">
+                    <div class="form-group">
+                        <label for="loginInputEmail">Email address</label>
+                        <input type="email" class="form-control" id="loginInputEmail" aria-describedby="loginEmailHelp"
+                            placeholder="Enter email">
+                        <small id="loginEmailHelp" class="form-text text-muted">We'll never share your email with anyone
+                            else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="loginInputPassword">Password</label>
+                        <input type="password" class="form-control" id="loginInputPassword" placeholder="Password">
+                        <small id="loginPasswordHelp" class="form-text text-muted">The longer, the better.</small>
+                    </div>
+                    <button id="loginSubmitButton" type="submit" class="btn btn-primary">Submit</button>
+                    <button id="forgotPasswordButton" type="button" class="btn btn-outline-secondary"
+                        onclick="location.href='/auth/forgotpassword/'">Forgot password?</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/js/login.js"></script>
+</body>
+
+</html>

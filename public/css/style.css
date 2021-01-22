@@ -1,0 +1,96 @@
+body {
+    font-family: 'Helvetica Neue', sans-serif, monospace;
+    background-image: url("/media/low-poly-landscape.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+h1 {
+    font-family: 'Helvetica Neue', sans-serif, monospace;
+    font-size: 2.5rem;
+    width: 100%;
+    text-align: left;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    width: auto\9; /* ie8 */
+}
+
+
+
+.btn.btn-info.playbuttons {
+    top: 45vh;
+    right: 1vh;
+    z-index: 1001;
+    position: absolute;
+}
+
+.btn.btn-warning.playbuttons {
+    top: 45vh;
+    right: 14vh;
+    z-index: 1001;
+    position: absolute;
+}
+
+.btn.btn-primary.playbuttons {
+    top: 45vh;
+    right: 24vh;
+    z-index: 1001;
+    position: absolute;
+}
+
+p.title {
+    font-family: 'Oleo Script', cursive;
+    color: black;
+    text-align: center;
+    font-size: 7vmax;
+    text-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+#mainPanel{
+    position: relative;
+    width: 75%;
+    height: 500px;
+    float: left;
+    text-align: center;
+    background-color: lightslategrey;
+}
+
+.navbar-custom {
+    color: white;
+    background-color: white;
+}
+
+.container{
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.content {
+    background-color: White;
+    padding: 20px;
+}
+
+.table-third, .table-third>td, .table-third>th {
+    background-color: #bf9b77;
+    
+}
+
+.table-third:hover, .table-third:hover>td, .table-third:hover>th{
+    background-color: #b88b5f;
+}
+
+#street-view {
+    height: 100vh;
+}
+
+#guess-map{
+    z-index: 1000;
+    position: absolute;
+    top: 1vh;
+    right: 1vh;
+    min-height: 43vh;
+    min-width: 43vh;
+}

@@ -1,0 +1,40 @@
+{
+  "name": "guess-where-i-am",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/radieus/guess-where-i-am.git"
+  },
+  "author": "Daniel Brito, Radoslaw Dubiel",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/radieus/guess-where-i-am/issues"
+  },
+  "homepage": "https://github.com/radieus/guess-where-i-am#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.0",
+    "config": "^3.3.3",
+    "cookie-parser": "^1.4.5",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "ejs": "^3.1.5",
+    "express": "^4.17.1",
+    "http": "^0.0.1-security",
+    "joi": "^17.3.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mailgun-js": "^0.22.0",
+    "mongodb": "^3.6.3",
+    "mongoose": "^5.11.11",
+    "nodemon": "^2.0.6",
+    "remodal": "^1.1.1",
+    "uuid": "^8.3.2"
+  }
+}
