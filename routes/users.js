@@ -2,9 +2,10 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const _ = require('lodash');
-const { User, validate } = require('../models/user');
+const { User, validateUser } = require('../models/user');
 const express = require('express');
 const router = express.Router();
+const db = require('../config/db');
  
 router.post('/', async (req, res) => {
     // validate the request first
@@ -30,6 +31,15 @@ router.post('/', async (req, res) => {
         // const token = user.generateAuthToken();
         // res.header('x-auth-token', token).send(_.pick(user, ['_id', 'name', 'email']));
         res.send(_.pick(user, ['_id', 'username', 'email']));
+    }
+});
+
+ 
+router.post('/username', async (req, res) => {
+
+    let user = await User.findOne({ _id: req.body._id });
+    if (user) {
+        res.send(_.pick(user, 'username'));
     }
 });
  

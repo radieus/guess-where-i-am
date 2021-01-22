@@ -13,6 +13,7 @@ router.post('/', async (req, res) => {
         return res.status(400).send(error.details[0].message);
     }
 
+    // check if there is a user in a database with given username
     let user = await User.findOne({ username: req.body.username });
     if (user) {
         // pick values of those keys from the body (lodash)
@@ -37,9 +38,11 @@ router.get('/scores', async (req, res) => {
         },
         {
             $project: { _id: false }
-        }
-        ).toArray(function(err, scores) {
-      res.send(scores);
+        }).toArray(function(err, scores) {
+            scores.sort(function(a, b) {
+                return a.score < b.score;
+            });
+        res.send(scores);
     });
 });
 

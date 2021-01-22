@@ -3,20 +3,18 @@ const config = require('config');
  
 module.exports = function (req, res, next) {
     req.logged = true;
-
-    // console.log(req)
     try {
         const token = req.header('Cookie');
         if (!token) {
             req.logged = false;
             if (req.originalUrl == '/login/') {
-                next();
+                return next();
             }
-            if (req.originalUrl == '/') {
-                next();
+            else if (req.originalUrl == '/') {
+                return next();
             }
-            if (req.originalUrl == '/registration/') {
-                next();
+            else if (req.originalUrl == '/registration/') {
+                return next();
             }
         }
         else {
