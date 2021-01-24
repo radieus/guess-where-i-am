@@ -1,11 +1,8 @@
 const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken');
-const config = require('config');
 const _ = require('lodash');
 const { User, validateUser } = require('../models/user');
 const express = require('express');
 const router = express.Router();
-const db = require('../config/db');
  
 router.post('/', async (req, res) => {
     // validate the request first

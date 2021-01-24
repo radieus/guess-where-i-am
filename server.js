@@ -1,7 +1,6 @@
 const path = require('path');
 const http = require('http');
 const express = require('express');
-const config = require('config');
 const mongoose = require('mongoose');
 const { Game } = require('./models/game');
 const cookieParser = require('cookie-parser');

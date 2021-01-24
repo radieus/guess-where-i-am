@@ -1,7 +1,6 @@
 require('dotenv').config();
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
-const config = require('config');
 const mailgun = require('mailgun-js');
 const DOMAIN = 'sandboxfc844bf19c974c188c4690dbbdad0426.mailgun.org';
 const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN});
