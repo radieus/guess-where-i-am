@@ -35,7 +35,7 @@ module.exports = function (req, res, next) {
     }
  
     try {
-        const decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
+        const decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
         req.user = decoded;
         console.log(decoded);
         next();

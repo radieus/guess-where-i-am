@@ -8,12 +8,13 @@ const cookieParser = require('cookie-parser');
 const { User } = require('./models/user');
 const jwt = require("jsonwebtoken");
 const _ = require('lodash');
-
 const mongo = require('./config/db');
 const users = require('./routes/users');
 const games = require('./routes/games');
 const auth = require('./routes/auth');
 const jwt_auth = require('./middleware/auth');
+
+require('dotenv').config();
 
 var latGoal;
 var lngGoal;
@@ -31,7 +32,7 @@ function inRange(x, min, max) {
 }
 
 // check if PRIVATE_KEY is defined
-if (!config.get('PRIVATE_KEY')) {
+if (!process.env.PRIVATE_KEY) {
     console.error('[ERROR]: PRIVATE_KEY is not defined.');
     process.exit(1);
 }
@@ -121,7 +122,7 @@ app.get('/logout/', function (request, response) {
 app.post('/guess', jwt_auth, async function (req, res) {
     var token = req.header('Cookie');
     var my_jwt = token.split(/=(.+)/)[1];
-    var decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
+    var decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
     // we will receive the latitude and longitude
     data = req.body;
     // for the moment the goal latitude and longitude is hardcoded
@@ -152,7 +153,7 @@ app.post('/guess', jwt_auth, async function (req, res) {
 
     //Now we will get the token and from it the _id
     var my_jwt = token.split(/=(.+)/)[1];
-    decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
+    decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
     var id = decoded['_id'];
     //With the id we will extract the username
     let user = await User.findOne({ _id: id });
@@ -212,7 +213,7 @@ app.post('/skip', jwt_auth, async function (req, res){
     //When the user does a POST request to skip we add a round to his 
     var token = req.header('Cookie');
     var my_jwt = token.split(/=(.+)/)[1];
-    var decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
+    var decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
     var id = decoded['_id'];
     let user = await User.findOne({ _id: id });
     if (user) {
@@ -294,7 +295,7 @@ app.post('/points', jwt_auth, (req, res) => {
 
     // to get just the token (splits after =)
     var my_jwt = token.split(/=(.+)/)[1];
-    decoded = jwt.verify(my_jwt, config.get('PRIVATE_KEY'));
+    decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
     pointsArray.push([decoded['_id'], points]);
     res.send('Your point total was sent to the server!');
 });

@@ -1,9 +1,10 @@
+require('dotenv').config();
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const config = require('config');
 const mailgun = require('mailgun-js');
 const DOMAIN = 'sandboxfc844bf19c974c188c4690dbbdad0426.mailgun.org';
-const mg = mailgun({apiKey: config.get('MAILGUN_KEY'), domain: DOMAIN});
+const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN});
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
 const { User } = require('../models/user');
@@ -51,7 +52,7 @@ router.put('/forgotpassword', async (req, res) => {
         subject: 'Guess Where I Am: Password reset link',
         html:`
             <h2>Please click on the given link to reset your password</h2>
-            <p>${config.get('CLIENT_URL')}auth/reset/${forgotPasswordToken}</p>
+            <p>${process.env.CLIENT_URL}auth/reset/${forgotPasswordToken}</p>
             `
         };
 
@@ -77,7 +78,7 @@ router.put('/reset/:id', async (req, res) => {
     const resetLink = req.params.id;
 
     if (resetLink) {
-        jwt.verify(resetLink, config.get('RESET_PASSWORD_KEY'), (err, decodedData) => {
+        jwt.verify(resetLink, process.env.RESET_PASSWORD_KEY, (err, decodedData) => {
             if (err) {
                 return res.status(400).send('Incorrect or expired token!')
             }
