@@ -18,25 +18,16 @@ img {
     width: auto\9; /* ie8 */
 }
 
-
-
-.btn.btn-info.playbuttons {
-    top: 45vh;
-    right: 1vh;
-    z-index: 1001;
-    position: absolute;
-}
-
 .btn.btn-warning.playbuttons {
     top: 45vh;
-    right: 14vh;
+    right: 100px;
     z-index: 1001;
     position: absolute;
 }
 
 .btn.btn-primary.playbuttons {
     top: 45vh;
-    right: 24vh;
+    right: 180px;
     z-index: 1001;
     position: absolute;
 }
