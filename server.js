@@ -123,6 +123,7 @@ app.post('/guess', jwt_auth, async function (req, res) {
     var token = req.header('Cookie');
     var my_jwt = token.split(/=(.+)/)[1];
     var decoded = jwt.verify(my_jwt, process.env.PRIVATE_KEY);
+    var redirectBool = false;
     // we will receive the latitude and longitude
     data = req.body;
     // for the moment the goal latitude and longitude is hardcoded
