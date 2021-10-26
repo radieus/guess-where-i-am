@@ -2,7 +2,7 @@ require('dotenv').config();
 const Joi = require('joi');
 const jwt = require('jsonwebtoken');
 const mailgun = require('mailgun-js');
-const DOMAIN = 'sandboxfc844bf19c974c188c4690dbbdad0426.mailgun.org';
+const DOMAIN = 'sandbox63a5522413794dae8922ae73ca7c196f.mailgun.org';
 const mg = mailgun({apiKey: process.env.MAILGUN_KEY, domain: DOMAIN});
 const bcrypt = require('bcrypt');
 const _ = require('lodash');
@@ -46,7 +46,7 @@ router.put('/forgotpassword', async (req, res) => {
 
     const forgotPasswordToken = user.generateForgotPasswordToken();
     const data = {
-        from: 'whereiamguess@gmail.com',
+        from: 'guesswhereiam346.com',
         to: email,
         subject: 'Guess Where I Am: Password reset link',
         html:`
