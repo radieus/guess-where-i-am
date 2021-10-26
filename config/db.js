@@ -11,7 +11,7 @@ async function InitiateMongoServer() {
     });
     console.log("Connected to MongoDB!");
     console.log("[database] guess-where-i-am");
-    exports.dbObj = mongoose.connection.client.db('Cluster0');
+    exports.dbObj = mongoose.connection.client.db('guesswhereiam');
   } catch (e) {
     console.log(e);
     throw e;
