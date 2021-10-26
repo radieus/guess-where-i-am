@@ -46,7 +46,7 @@ router.put('/forgotpassword', async (req, res) => {
 
     const forgotPasswordToken = user.generateForgotPasswordToken();
     const data = {
-        from: 'guesswhereiam346.com',
+        from: 'guesswhereiam346@gmail.com',
         to: email,
         subject: 'Guess Where I Am: Password reset link',
         html:`
